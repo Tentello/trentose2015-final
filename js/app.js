@@ -27,6 +27,8 @@ var SantaModel = {
    */
    init : function(list){
        $(".question-items").click(function(){
+           
+           //Non funziona questo e non riesco a sistemarlo per il tempo, teoricamento ho scritto cosa dovrebbe fare tutto il resto
            alert($(this).children().attr("id"));
             if(SantaModel.pack($(this).children().text())==1){
                 alert("right");
@@ -38,6 +40,7 @@ var SantaModel = {
   
    /* It moves "current" to the next request */
    next : function (){
+       SantaModel.currentQuestion += 1;
    },
   
    /* Returns the current request. 
@@ -66,6 +69,10 @@ var SantaController = {
     init : function(){
         SantaModel.init(requests);
         SantaView.init(SantaModel.getCurrentRequest());
+        $(".question-items").click(function(){
+            SantaModel.next();
+            SantaView.init(SantaModel.getCurrentRequest());
+        }
     }
 };
 
